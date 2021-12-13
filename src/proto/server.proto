@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package mocin;
+
+message Identify {
+  bool is_miner = 1;
+  uint32 version = 2;
+}
+

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package mocin;
+
+/* Identify - Message sent between nodes in a cluster to identify each other */
+message Identify {
+  uint32 magic   = 1;    // Should equal 0xCEACCEAC
+  string ip      = 2;    // IP address as seen by the other node
+  uint32 version = 3;    // Mocin Protocol version (1 as of now)
+  uint64 curtime = 4;    // Current time of sender (in epoch)
+  
+  enum NodeType {
+    CLIENT  = 0; // A general client of the network, sends transactions
+    MINER   = 1; // Responsible for processing transactions only
+    RELAY   = 2; // Relay (aka Ringleader) is responsible for managing/load-balancing the network
+    SUBNODE = 3; // Connects a smaller sub-cluster to a global network
+  }
+}
+
